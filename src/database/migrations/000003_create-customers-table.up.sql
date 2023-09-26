@@ -44,4 +44,4 @@ CREATE TRIGGER customers_updated
   BEFORE UPDATE
   ON received_order.customers
   FOR EACH ROW
-EXECUTE PROCEDURE set_updated_at()
+EXECUTE PROCEDURE set_updated_at();
