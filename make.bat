@@ -61,5 +61,6 @@ if %1==migrate-github (
     echo input tag for 2nd parameter
     exit /b
   )
+  docker-compose exec app migrate -path %DIR_PATH% -database %DATABASE_URL% down
   docker-compose exec app migrate -source %GITHUB_URL%#%2 -database %DATABASE_URL% up
 )
