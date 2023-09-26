@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	_ "github.com/lib/pq"
@@ -29,5 +30,15 @@ func main() {
 		log.Fatal("failed to connect database: ", err)
 	}
 
-	log.Default().Fatalln("success to connect db!!")
+	log.Default().Println("success to connect postgres!!")
+
+	// ダミーのHTTPサーバー起動
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { w.Write([]byte("Hello, postgres!")) })
+
+	err = http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Fatal("failed to serve: ", err)
+	}
+
+	log.Default().Println("Server started on port: 8080")
 }
