@@ -8,15 +8,16 @@ services:
     container_name: app
     volumes:
       - ./:/app
-    # command: ["go", "run", "src/cmd/main.go"]
+    command: ["go", "run", "src/cmd/main.go"]
     ports:
       - "8080:8080"
-    # environment:
-    #   - DB_HOST=${DB_HOST:-db}
-    #   - DB_PORT=${DB_POTR:-5432}
-    #   - DB_USER=${POSTGRES_USER:-postgres}
-    #   - DB_PASSWORD=${POSTGRES_PASSWORD:-password}
-    #   - DB_NAME=${POSTGRES_DB:-postgres}
+    environment:
+      DB_HOST: db
+      DB_PORT: ${POSTGRES_PORT}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
+      TZ: ${TIME_ZONE}
     depends_on:
       - db
     networks:
